@@ -1,0 +1,70 @@
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { favoritesApi } from "../api/services/favourites";
+import { Country } from "../types/country";
+import { IconButton, Tooltip } from "@mui/material";
+import { FavoriteBorder, Favorite } from "@mui/icons-material";
+
+interface FavouriteButtonProps {
+  country: Country;
+  onToggle?: (isFavorite: boolean) => void;
+}
+
+export const FavouriteButton = ({ country, onToggle }: FavouriteButtonProps) => {
+  const user = useAuth();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (!user || isInitialized) return;
+
+    const checkFavouriteStatus = async () => {
+      try {
+        const status = await favoritesApi.isFavorite(country.name.common);
+        setIsFavorite(status);
+        setIsInitialized(true);
+      } catch (error) {
+        console.error("Error checking favourite status:", error);
+      }
+    };
+    checkFavouriteStatus();
+  }, [user, country.name.common, isInitialized]);
+
+  const handleToggleFavorite = async () => {
+    if (!user) return;
+    setLoading(true);
+    try {
+      if (isFavorite) {
+        await favoritesApi.removeFavorite(country.name.common);
+        setIsFavorite(false);
+      } else {
+        await favoritesApi.addFavorite(country);
+        setIsFavorite(true);
+      }
+      if (onToggle) {
+        onToggle(!isFavorite);
+      }
+    } catch (error) {
+      console.error("Error toggling favourite:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!user) return null;
+
+  return (
+    <Tooltip
+      title={isFavorite ? "Remove from favourites" : "Add to favourites"}
+    >
+      <IconButton
+        onClick={handleToggleFavorite}
+        disabled={loading}
+        color="primary"
+      >
+        {isFavorite ? <Favorite /> : <FavoriteBorder />}
+      </IconButton>
+    </Tooltip>
+  );
+};
