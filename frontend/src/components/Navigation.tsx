@@ -9,7 +9,8 @@ export const Navigation = () => {
   const { mode, toggleMode } = useCustomTheme();
 
   return (
-    <AppBar position="static" sx={{ mb: 3 }}>
+    <AppBar position="static" sx={{ mb: 3
+     }}>
       <Toolbar>
         {/* Left-side buttons */}
         <Button color="inherit" component={RouterLink} to="/">

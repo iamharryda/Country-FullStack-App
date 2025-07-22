@@ -39,7 +39,3 @@
 
 
 
-Cypress.Commands.add('getMuiCard', (index?: number) => {
-    const cards = cy.get('.MuiCard-root');
-    return typeof index === 'number' ? cards.eq(index) : cards;
-})

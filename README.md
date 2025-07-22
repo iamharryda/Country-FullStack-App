@@ -55,7 +55,17 @@ The applications will be available at:
 - `npm run build:frontend` - Build frontend only
 - `npm run build:backend` - Build backend only
 
-## Environment Setup
+## Environment Setup(FrontEnd)
+
+1. Create a `.env` file in the backend directory:
+
+```env
+SUPABASE_URL=https://your-supabase-instance.supabase.co
+SUPABASE_ANON_KEY=your-anon-key
+VITE_OPENWEATHER_API_KEY= your-open-weather-key
+```
+
+## Environment Setup(BackEnd)
 
 1. Create a `.env` file in the backend directory:
 

@@ -1,6 +1,5 @@
 import '@testing-library/cypress/add-commands';
 import "../support/commands";
-import { inRange } from 'cypress/types/lodash';
 
 describe("Countries Application", () => {
     beforeEach(() => {
