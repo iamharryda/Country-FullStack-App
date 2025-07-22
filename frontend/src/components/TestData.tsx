@@ -30,7 +30,7 @@ export const TestData = () => {
   //   useEffect(() => {
   //     const fetchData = async () => {
   //       try {
-  //         const response = await fetch("http://localhost:5001/test/supabase");
+  //         const response = await fetch("https://country-fullstack-app.onrender.com//test/supabase");
   //         const result = await response.json();
 
   //         if (result.error) {
