@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { TestData } from "./components/TestData";
 import { Login } from "./components/Auth/Login";
 import { ProtectedRoute } from "./components/Auth/ProtectedRoute";
@@ -10,6 +10,7 @@ import { Navigation } from "./components/Navigation";
 import CountriesList from "./components/Countries/CountriesList";
 import CountryDetail from "./components/Countries/CountryDetail";
 import { Favourites } from "./components/Favourites";
+import HomePage from "./components/Homepage.tsx/Homepage";
  
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
       <BrowserRouter>
         <Box>
           <Navigation />
-          <Box sx={{ p: 3 }}>
+          <Box >
             <Routes>
+            <Route path="/" element={<HomePage></HomePage>}></Route>
             <Route path="/login" element={
                 <>
                 <AuthRedirect/>
